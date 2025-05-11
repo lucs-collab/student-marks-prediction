@@ -1,61 +1,38 @@
+Study Hours vs Scores - Linear Regression Model
+This project demonstrates the application of Linear Regression to predict student scores based on the number of study hours. The dataset used in this project is stored locally on your system. The file path to the dataset is "C:\Users\wwwlu\Documents\student_scores.csv".
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+Key Steps in the Project:
+Data Loading: The dataset is loaded using Pandas from a local CSV file.
 
-url = r"C:\Users\wwwlu\Documents\student_scores.csv"
-df = pd.read_csv(url)
+Data Visualization: A scatter plot is created to visualize the relationship between study hours and scores.
 
+Data Splitting: The data is split into training and testing sets using train_test_split from Scikit-learn (80% training, 20% testing).
 
-plt.scatter(df['Hours'], df['Scores'], color='blue')
-plt.title('Study Hours vs Scores')
-plt.xlabel('Hours Studied')
-plt.ylabel('Score')
-plt.grid(True)
-plt.show()
+Model Training: A Linear Regression model is trained on the training data.
 
+Prediction & Evaluation: The model's performance is evaluated using metrics such as Mean Squared Error (MSE) and R2 Score. An R2 score of 0.9 indicates that the model is highly effective at predicting the scores based on the study hours.
 
-X = df[['Hours']]
-y = df['Scores']
+Regression Line: The regression line is visualized along with the original data points to show the model's fit.
 
+Prediction: A user can input the number of study hours, and the model will predict the corresponding score.
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Predicted vs Actual Visualization: A final plot compares the predicted scores with the actual scores, displaying how well the model performs.
 
+Requirements:
+Python 3.x
 
-model = LinearRegression()
-model.fit(X_train, y_train)
+Libraries: Pandas, NumPy, Matplotlib, Scikit-learn
 
+How to Use:
+Clone the repository.
 
-y_pred = model.predict(X_test)
+Install the required libraries using pip install -r requirements.txt.
 
+Make sure the dataset file is present at the specified location: C:\Users\wwwlu\Documents\student_scores.csv.
 
-print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-print("R2 Score:", r2_score(y_test, y_pred))
+Run the script to load the dataset, train the model, and predict scores for given study hours.
 
+Example Output:
+R2 Score: 0.9 (indicating that 90% of the variance in the data is explained by the model).
 
-line = model.coef_ * X + model.intercept_
-
-plt.scatter(X, y, color='blue')
-plt.plot(X, line, color='red')
-plt.title('Regression Line: Study Hours vs Scores')
-plt.xlabel('Hours Studied')
-plt.ylabel('Score')
-plt.grid(True)
-plt.show()
-
-
-hours = int(input("whats the hour"))
-hours = np.array([[hours]])
-predicted_score = model.predict(hours)
-print(f"Predicted score for {hours[0][0]} study hours = {predicted_score[0]:.2f}")
-
-
-plt.scatter(y_test, y_pred)
-plt.plot([0, 100], [0, 100], color='red')
-plt.title("Predicted vs Actual Scores")
-plt.xlabel("Actual Scores")
-plt.ylabel("Predicted Scores")
-plt.show()
+Predicted Score: For example, a student who studies for 9.25 hours would likely score around a predicted value.
